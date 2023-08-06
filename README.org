@@ -4,7 +4,8 @@
 - [[#Scripts][Scripts]]
   - [[#send][send]]
   - [[#archive_all][archive_all]]
-  - [[#archJavaSwitcher][archJavaSwitcher]]  
+  - [[#archJavaSwitcher][archJavaSwitcher]]
+  - [[#tcd][tcd]]
 * Scripts
 ** send
 *** Dependencies
@@ -60,4 +61,23 @@ The sh script will need sudo pswd to work.
 *** Usage
 #+begin_src bash
 ./archJavaSwitcher
+#+end_src
+
+
+
+
+
+
+** tcd
+*** Dependicies
+- none :)
+*** Description
+TCD [temp change directory]
+Allows running commands in a different directory
+!The command will create the directory if it doesn't exist!
+*** Usage
+#+begin_src bash
+./tcd build make; ./build/[program]
+# or
+./tcd ~/.config/nvim ls -l
 #+end_src
