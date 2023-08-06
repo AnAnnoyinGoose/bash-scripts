@@ -72,9 +72,11 @@ The sh script will need sudo pswd to work.
 *** Dependicies
 - none :)
 *** Description
-TCD [temp change directory]
-Allows running commands in a different directory
-!The command will create the directory if it doesn't exist!
+TCD [temp change directory] \\
+
+Allows running commands in a different directory. \\
+
+The command will create the directory if it doesn't exist!
 *** Usage
 #+begin_src bash
 ./tcd build make; ./build/[program]
