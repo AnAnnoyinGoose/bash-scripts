@@ -1,0 +1,31 @@
+.\" Manpage for fix-touch.sh
+.TH FIX-TOUCH.SH 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+fix-touch.sh \- Adjust touchscreen settings and rotate display
+.SH SYNOPSIS
+.B ./fix-touch.sh
+.SH DESCRIPTION
+The \fBfix-touch.sh\fR script is used to adjust touchscreen calibration and rotate the display on a Linux system. 
+It rotates the primary display to the right and applies a coordinate transformation matrix to the touchscreen.
+
+.SH DEPENDENCIES
+This script requires:
+.TP
+.B xrandr
+.TP
+.B xinput
+
+.SH USAGE
+Run the script without arguments:
+.PP
+.B ./fix-touch.sh
+.PP
+This command will:
+.TP
+1. Rotate the primary display to the right.
+.TP
+2. Apply a coordinate transformation matrix to the touchscreen.
+
+.SH AUTHOR
+Written by AnAnnoyinGoose.
+
