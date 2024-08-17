@@ -1,0 +1,28 @@
+.\" Manpage for remotebuild.sh
+.TH REMOTEBUILD 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+remotebuild.sh \- Build a project on a remote machine and optionally run it
+.SH SYNOPSIS
+.B remotebuild.sh
+[<I>-r</I>] <I>remote machine</I> <I>dest</I> <I>build.sh</I> <I>directory-to-send</I> [<I>run-command</I>]
+.SH DESCRIPTION
+The
+.B remotebuild.sh
+script sends a directory to a remote machine, executes a build script, and retrieves the build folder. With the `-r` flag, it also runs the built program on the remote machine, captures active I/O, and sends the log file back.
+.SH USAGE
+Without the `-r` flag:
+.PP
+.B ./remotebuild.sh <remote machine> <dest> <build.sh> <directory-to-send>
+.PP
+With the `-r` flag:
+.PP
+.B ./remotebuild.sh -r <remote machine> <dest> <build.sh> <directory-to-send> <run-command>
+.SH EXAMPLE
+Building and running a project with active I/O:
+.PP
+.B ./remotebuild.sh -r user@remotehost /home/user/project build.sh ./src "make && ./build/myprogram"
+.SH EXIT STATUS
+Returns 0 on success, 1 if an error occurs or if dependencies are missing.
+.SH AUTHOR
+AnAnnoyinGoose
+

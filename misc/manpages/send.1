@@ -1,0 +1,36 @@
+.\" Manpage for send.sh
+.TH SEND 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+send.sh \- Send a file to a remote server using sshpass and gpg encryption
+.SH SYNOPSIS
+.B send.sh
+<I>file</I> <I>user@host:/dir/dir</I>
+.SH DESCRIPTION
+The
+.B send.sh
+script uses sshpass and a GPG-encrypted key to securely send a file to a remote server. The SSH password key should be encrypted with GPG and placed in the same directory as the script.
+.SH KEY CREATION
+To create and encrypt the SSH password key:
+.PP
+.B touch .sshpwd
+.B echo "sshkey" >> .sshpwd
+.B gpg -c .sshpwd
+.B rm .sshpwd
+.PP
+Make sure to leave the key in the same directory as the script.
+.SH DEPENDENCIES
+.TP
+.B ssh
+.TP
+.B scp
+.TP
+.B sshpass
+.SH USAGE
+To use the script:
+.PP
+.B ./send.sh <file> <user@host:/dir/dir>
+.SH EXIT STATUS
+Returns 0 on success, 1 if dependencies are missing or if an error occurs.
+.SH AUTHOR
+AnAnnoyinGoose
+

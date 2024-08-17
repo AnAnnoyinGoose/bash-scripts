@@ -1,0 +1,24 @@
+.\" Manpage for tcd
+.TH TCD 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+tcd \- Temporarily change directory and run commands
+.SH SYNOPSIS
+.B tcd
+<I>directory</I> <I>command</I>
+.SH DESCRIPTION
+The
+.B tcd
+script allows you to run commands in a specified directory. The directory will be created if it does not exist.
+.SH DEPENDENCIES
+.TP
+None
+.SH USAGE
+To use
+.B tcd:
+.PP
+.B ./tcd <directory> <command>
+.SH EXIT STATUS
+Returns 0 on success, 1 if an error occurs.
+.SH AUTHOR
+AnAnnoyinGoose
+

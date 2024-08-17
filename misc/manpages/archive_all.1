@@ -1,0 +1,25 @@
+.\" Manpage for archive_all.sh
+.TH ARCHIVE_ALL 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+archive_all.sh \- Archive and optionally encrypt files in the current directory
+.SH SYNOPSIS
+.B archive_all.sh
+[<I>password</I>]
+.SH DESCRIPTION
+The
+.B archive_all.sh
+script archives all files in the current directory, optionally encrypting them with OpenSSL if a password is provided.
+.SH DEPENDENCIES
+.TP
+.B tar
+.TP
+.B openssl
+.SH USAGE
+To archive files:
+.PP
+.B ./archive_all.sh [password]
+.SH EXIT STATUS
+Returns 0 on success, 1 if an error occurs.
+.SH AUTHOR
+AnAnnoyinGoose
+

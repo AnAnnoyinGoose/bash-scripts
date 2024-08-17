@@ -1,85 +1,139 @@
 #+AUTHOR: AnAnnoyinGoose
 
-* ToC
-- [[#Scripts][Scripts]]
+* Table of Contents
+- [[#scripts][Scripts]]
   - [[#send][send]]
   - [[#archive_all][archive_all]]
   - [[#archJavaSwitcher][archJavaSwitcher]]
   - [[#tcd][tcd]]
+  - [[#remotebuild][remotebuild]]
+  - [[#install][install]]
+
 * Scripts
+
 ** send
 *** Dependencies
   - ssh
   - scp
   - sshpass
+
 *** Description
-Uses sshpass and a 'key' to send a file to a remote server.
-The key the ssh password encrypted with gpg.
+The `send.sh` script uses `sshpass` and a GPG-encrypted key to securely send a file to a remote server. 
+
 *** Key Creation
+To create and encrypt the SSH password key:
 #+begin_src bash
 touch .sshpwd
 echo "sshkey" >> .sshpwd
 gpg -c .sshpwd
 rm .sshpwd
 #+end_src
-!! Make sure to leave the key in the same directory as the script !!
+**Note:** Make sure to leave the key in the same directory as the script.
+
 *** Usage
+To use the script:
 #+begin_src bash
 ./send.sh <file> <user@host:/dir/dir>
 #+end_src
-If you dont have the dependencies the script will prompt you and install ssh (open ssh) and sshpass if your os is:
+If the required dependencies are not installed, the script will prompt you to install `ssh` (OpenSSH) and `sshpass` on supported OSes:
 - Debian/Ubuntu
 - CentOS
 - Fedora
-- Archlinux ( the best :) )
-otherwise it'll exit 1
-
-
+- Arch Linux (the best 😊)
+  
+Otherwise, it will exit with status `1`.
 
 ** archive_all
-*** Dependicies
+*** Dependencies
   - tar
   - openssl
+
 *** Description
-Archives all files in the current directory.
+The `archive_all.sh` script archives all files in the current directory, optionally encrypting them with OpenSSL.
+
 *** Usage
+To archive files:
 #+begin_src bash
 ./archive_all.sh [password]
 #+end_src
-the program will get the all images, videos, and txt files in the current directory.
-And will encrypt the with openssl if wanted.
- 
-
+The script will select all images, videos, and text files in the current directory and offer to encrypt them with OpenSSL if a password is provided.
 
 ** archJavaSwitcher
-*** Dependicies
+*** Dependencies
   - rofi
   - archlinux-java
+
 *** Description
-Uses 'archlinux-java status' to get the list of all java versions and passes it to rofi.
-The sh script will need sudo pswd to work.
+The `archJavaSwitcher.sh` script uses `archlinux-java status` to retrieve the list of installed Java versions and passes them to `rofi` for selection. This script requires sudo privileges to switch the Java version.
+
 *** Usage
+To switch Java versions:
 #+begin_src bash
-./archJavaSwitcher
+./archJavaSwitcher.sh
 #+end_src
 
-
-
-
-
-
 ** tcd
-*** Dependicies
-- none :)
+*** Dependencies
+  - none
+
 *** Description
-TCD [temp change directory] \\
+`TCD` (Temp Change Directory) allows you to run commands in a different directory temporarily. The script will create the directory if it does not exist.
 
-Allows running commands in a different directory. \\
-
-The command will create the directory if it doesn't exist!
 *** Usage
+To use `tcd`:
 #+begin_src bash
 ./tcd build make; ./build/[program]
 # or
 ./tcd ~/.config/nvim ls -l
 #+end_src
+
+** remotebuild
+*** Description
+The `remotebuild.sh` script allows you to build a project on a remote machine. With the `-r` flag, you can also run the built program on the remote machine with active I/O, and the output is logged and sent back to the local machine.
+
+*** Usage
+#### Standard Usage
+Without the `-r` flag:
+#+begin_src bash
+remotebuild.sh <remote machine> <dest> <build.sh> <directory-to-send>
+#+end_src
+This command sends a directory to the remote machine, runs a build script, and retrieves the `build` folder.
+
+#### Usage with the `-r` flag
+With the `-r` flag:
+#+begin_src bash
+remotebuild.sh -r <remote machine> <dest> <build.sh> <directory-to-send> <run-command>
+#+end_src
+This command additionally runs the specified command on the remote machine, captures the output, and sends the log back to the local machine.
+
+#### Example
+Building and running a project with active I/O on a remote machine:
+#+begin_src bash
+remotebuild.sh -r user@remotehost /home/user/project build.sh ./src "make && ./build/myprogram"
+#+end_src
+This command performs the following steps:
+1. Sends the `./src` directory to `/home/user/project` on the remote machine `user@remotehost`.
+2. Executes the `build.sh` script.
+3. Runs the command `make && ./build/myprogram` on the remote machine.
+4. Captures the output, saves it to `log.[date|time].rb`, and sends it back to the local machine.
+
+** install
+*** Dependencies
+  - dialog
+
+*** Description
+The `install.sh` script provides a TUI (Text User Interface) for managing the installation of bash scripts from this repository into `~/.local/bin/`. It dynamically lists all available scripts, allowing you to select which ones to install, update, or remove. The script also handles manpages and Zsh completions located in the `misc/` directory.
+
+*** Usage
+To run the script manager:
+#+begin_src bash
+./install.sh
+#+end_src
+The main menu provides the following options:
+- **Install Scripts**: Lists scripts available for installation, excluding those already installed. It also checks for associated manpages in the `misc/manpages` directory and offers to install them.
+- **List Installed Scripts**: Displays a list of currently installed scripts in `~/.local/bin/`.
+- **Remove Scripts**: Allows you to select and remove installed scripts, along with their associated manpages.
+- **Update Scripts from Repo**: Pulls the latest updates from the repository using `git pull`.
+- **Install Zsh Completions**: Installs Zsh completions from the `misc/` directory into `~/.zsh/completions/`.
+
+The `install.sh` script ensures that your installed scripts and related resources are easily manageable from a single interface.

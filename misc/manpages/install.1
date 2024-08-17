@@ -1,0 +1,39 @@
+.\" Manpage for install.sh
+.TH INSTALL 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+install.sh \- Manage installation of bash scripts into ~/.local/bin/
+.SH SYNOPSIS
+.B install.sh
+.SH DESCRIPTION
+The
+.B install.sh
+script provides a TUI (Text User Interface) for managing the installation, removal, and update of bash scripts from the repository. It also handles installation of manpages and Zsh completions from the `misc/` directory.
+.SH DEPENDENCIES
+.TP
+.B dialog
+.SH USAGE
+To run the script manager:
+.PP
+.B ./install.sh
+.PP
+The main menu includes options to:
+.TP
+.B Install Scripts
+Lists available scripts for installation, excluding those already installed. Checks for and optionally installs associated manpages.
+.TP
+.B List Installed Scripts
+Displays currently installed scripts in `~/.local/bin/`.
+.TP
+.B Remove Scripts
+Allows removal of installed scripts and their associated manpages.
+.TP
+.B Update Scripts from Repo
+Pulls the latest updates from the repository.
+.TP
+.B Install Zsh Completions
+Installs Zsh completions from `misc/` into `~/.zsh/completions/`.
+.SH EXIT STATUS
+Returns 0 on success, 1 if an error occurs or if dependencies are missing.
+.SH AUTHOR
+AnAnnoyinGoose
+

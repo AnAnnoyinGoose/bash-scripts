@@ -1,0 +1,16 @@
+#compdef remotebuild.sh
+
+# _arguments defines the arguments and options that can be autocompleted
+_remotebuild() {
+  _arguments \
+    '-r[Run the built program on the remote machine]' \
+    '1:remote machine (user@host):' \
+    '2:destination directory on remote machine:_files' \
+    '3:build script:_files' \
+    '4:directory to send:_files' \
+    '5:run command:'
+}
+
+# Register the completion function
+compdef _remotebuild remotebuild.sh
+

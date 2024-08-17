@@ -1,0 +1,24 @@
+.\" Manpage for archJavaSwitcher.sh
+.TH ARCHJAVASWITCHER 1 "August 2024" "1.0" "Bash Scripts"
+.SH NAME
+archJavaSwitcher.sh \- Switch Java versions using rofi on Arch Linux
+.SH SYNOPSIS
+.B archJavaSwitcher.sh
+.SH DESCRIPTION
+The
+.B archJavaSwitcher.sh
+script uses `archlinux-java status` to retrieve the list of installed Java versions and passes them to `rofi` for selection. Requires sudo privileges to change the Java version.
+.SH DEPENDENCIES
+.TP
+.B rofi
+.TP
+.B archlinux-java
+.SH USAGE
+To switch Java versions:
+.PP
+.B ./archJavaSwitcher.sh
+.SH EXIT STATUS
+Returns 0 on success, 1 if an error occurs or if sudo is not available.
+.SH AUTHOR
+AnAnnoyinGoose
+
